@@ -56,5 +56,7 @@ public class Ball : MonoBehaviour
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         transform.position = curPosition;
 
+        rb.AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized * force, ForceMode.Impulse);  
+        Debug.Log(transform.position);
     }
 }
