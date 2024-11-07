@@ -18,7 +18,7 @@ public class Ball : MonoBehaviour
     {
         mousePosition = Input.mousePosition;
         mousePosition.z = 0;
-        //rb.AddForce((mousePosition - transform.position).normalized * force);  
+        rb.AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized * force, ForceMode.Impulse);  
         Debug.Log(transform.position);
     }
 }
