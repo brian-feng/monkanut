@@ -168,6 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 379008204}
   - component: {fileID: 379008209}
+  - component: {fileID: 379008210}
   - component: {fileID: 379008208}
   - component: {fileID: 379008207}
   - component: {fileID: 379008206}
@@ -206,7 +207,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.89396995, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.2, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -333,6 +334,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379008203}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &379008210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379008203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14372ac0ec4004e4488a0e3f6798844b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joint: {fileID: 0}
+  anchor: {fileID: 0}
+  chainBall: {fileID: 376415653}
+  rb: {fileID: 1549590123}
+  force: 10
 --- !u!1 &607392278
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +400,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.6666665, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -519,7 +537,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14372ac0ec4004e4488a0e3f6798844b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joint: {fileID: 0}
   anchor: {fileID: 2064971656}
+  chainBall: {fileID: 376415653}
   rb: {fileID: 607392281}
   force: 10
 --- !u!1 &705507993
@@ -807,7 +827,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18, y: 1, z: -12.46}
+  m_LocalPosition: {x: 0.18, y: 1, z: -6.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1012,6 +1032,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1392662864}
+  - component: {fileID: 1392662865}
   - component: {fileID: 1392662863}
   - component: {fileID: 1392662862}
   - component: {fileID: 1392662861}
@@ -1063,7 +1084,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.29999998, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.5, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1178,6 +1199,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 376415654}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1392662865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392662858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14372ac0ec4004e4488a0e3f6798844b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joint: {fileID: 0}
+  anchor: {fileID: 0}
+  chainBall: {fileID: 376415653}
+  rb: {fileID: 1392662859}
+  force: 10
 --- !u!1 &1549590122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,6 +1225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1549590128}
+  - component: {fileID: 1549590129}
   - component: {fileID: 1549590127}
   - component: {fileID: 1549590126}
   - component: {fileID: 1549590125}
@@ -1238,7 +1277,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.89396995, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.5, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1353,6 +1392,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 376415654}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1549590129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549590122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14372ac0ec4004e4488a0e3f6798844b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joint: {fileID: 0}
+  anchor: {fileID: 0}
+  chainBall: {fileID: 376415653}
+  rb: {fileID: 1549590123}
+  force: 10
 --- !u!1 &2064971656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,6 +1418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2064971662}
+  - component: {fileID: 2064971663}
   - component: {fileID: 2064971661}
   - component: {fileID: 2064971660}
   - component: {fileID: 2064971659}
@@ -1413,7 +1470,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.89396995, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.5, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1528,6 +1585,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 376415654}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2064971663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064971656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14372ac0ec4004e4488a0e3f6798844b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joint: {fileID: 0}
+  anchor: {fileID: 0}
+  chainBall: {fileID: 376415653}
+  rb: {fileID: 2064971657}
+  force: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

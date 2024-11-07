@@ -10,16 +10,22 @@ public class Ball : MonoBehaviour
     private Vector3 mousePosition;
     private Vector3 originPosition;
 
-    [SerializeField] public GameObject anchor;
-    [SerializeField] Rigidbody rb;
-    [SerializeField] public float force = 10f;
-    private Vector3 screenPoint;
-    private Vector3 offset;
+    [SerializeField] public HingeJoint joint;
 
-    public float distance;
+    [SerializeField] public GameObject anchor;
+    [SerializeField] public GameObject chainBall;
+    [SerializeField] Rigidbody rb;
+    [SerializeField] public float force = 100f;
+    private Vector3 screenPoint;
+
+    private Rigidbody chainRb;
+    private Vector3 offset;
+    private Vector3 curScreenPoint;
+    private Vector3 curPosition;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        chainRb = chainBall.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -29,13 +35,9 @@ public class Ball : MonoBehaviour
         originPosition = new Vector3(anchor.transform.position.x,anchor.transform.position.y, 0);
         mousePosition = Input.mousePosition;
         mousePosition.z = 0;
-        // // Debug.Log(mousePosition.x);
-        // // Debug.Log(mousePosition.y);
-        // if (Input.GetButtonDown("Fire1")) {
-        //     // Debug.Log("applying force");
-        //     OnMouseDown();
-        //     // rb.AddForce((mousePosition - transform.position).normalized * force);
-        // }
+
+
+        // rb.AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition) - chainBall.transform.position).normalized * force, ForceMode.Impulse);  
 
         // https://discussions.unity.com/t/drag-gameobject-with-mouse/1798/8
 
@@ -43,20 +45,22 @@ public class Ball : MonoBehaviour
     void OnMouseDown() {
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+        curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        transform.position = curPosition;
+
+
     }
 
 
     void OnMouseDrag()
     {
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        // curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        // Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        // transform.position = curPosition;
 
-        // Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint + offset);
+        // on mouse drag  
 
-        // distance = Vector3.Distance(originPosition, curPosition);
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-        transform.position = curPosition;
-
-        rb.AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized * force, ForceMode.Impulse);  
-        Debug.Log(transform.position);
+        rb.AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition) - chainBall.transform.position).normalized * force, ForceMode.Impulse);  
     }
 }
