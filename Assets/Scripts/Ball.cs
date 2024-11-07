@@ -18,11 +18,7 @@ public class Ball : MonoBehaviour
     {
         mousePosition = Input.mousePosition;
         mousePosition.z = 0;
-        Debug.Log(mousePosition.x);
-        Debug.Log(mousePosition.y);
-        rb.AddForce((mousePosition - transform.position).normalized * force);
-
-        
-
+        //rb.AddForce((mousePosition - transform.position).normalized * force);  
+        Debug.Log(transform.position);
     }
 }
