@@ -204,7 +204,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 1298579814}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0.89396995, z: 0}
   serializedVersion: 2
@@ -380,7 +380,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 2064971657}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.5, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
@@ -519,8 +519,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14372ac0ec4004e4488a0e3f6798844b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anchor: {fileID: 2064971656}
   rb: {fileID: 607392281}
   force: 10
+  distance: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,7 +1023,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 1549590123}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0.29999998, z: 0}
   serializedVersion: 2
@@ -1196,7 +1198,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 379008206}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0.89396995, z: 0}
   serializedVersion: 2
@@ -1371,7 +1373,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 1392662859}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0.89396995, z: 0}
   serializedVersion: 2
