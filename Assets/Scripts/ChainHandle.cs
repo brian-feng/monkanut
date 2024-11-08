@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Ball : MonoBehaviour
+public class ChainHandle : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    Transform player;
+    [SerializeField]
+    Transform firstChain;
     private Vector3 mousePosition;
     private Vector3 originPosition;
     [SerializeField] Rigidbody rb;
@@ -15,26 +16,33 @@ public class Ball : MonoBehaviour
     private Vector3 offset;
     private Vector3 curScreenPoint;
     private Vector3 curPosition;
-    public bool isDragging = false;
     public Vector3 currentVelocity;
-    public bool forceApplied = false;
-
+    float distance;
+    // Start is called before the first frame update
     void Start()
     {
+        distance = Vector3.Distance(transform.position, firstChain.position);
         rb = GetComponent<Rigidbody>();
-        Physics.gravity = new Vector3(0,-4,0); 
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        if (firstChain != null)
+        {
+            Gizmos.DrawWireSphere(firstChain.position, distance);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         // https://discussions.unity.com/t/dragging-constrained-to-radius-with-decay/570092/5
-        originPosition = new Vector3(transform.position.x,transform.position.y, 0);
+        originPosition = new Vector3(transform.position.x, transform.position.y, 0);
         mousePosition = Input.mousePosition;
         mousePosition.z = 0;
     }
 
-    void OnMouseDown() {
+    void OnMouseDown()
+    {
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
         curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
@@ -47,11 +55,16 @@ public class Ball : MonoBehaviour
         curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         transform.position = curPosition;
+        Vector3 dir = curPosition - firstChain.transform.position;
+        // clamp length
+        dir = Vector3.ClampMagnitude(dir, distance);
+        // add clamped length
+        transform.position = firstChain.transform.position + dir;
 
     }
 
     void OnMouseUp()
     {
-        
+
     }
 }
