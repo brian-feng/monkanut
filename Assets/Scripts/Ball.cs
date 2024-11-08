@@ -9,18 +9,20 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     private Vector3 mousePosition;
     private Vector3 originPosition;
-
-    [SerializeField] public HingeJoint joint;
     [SerializeField] Rigidbody rb;
-    [SerializeField] public float force = 100f;
+    [SerializeField] public float force = 10f;
     private Vector3 screenPoint;
-
     private Vector3 offset;
     private Vector3 curScreenPoint;
     private Vector3 curPosition;
+    public bool isDragging = false;
+    public Vector3 currentVelocity;
+    public bool forceApplied = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Physics.gravity = new Vector3(0,-4,0); 
     }
 
     // Update is called once per frame
@@ -47,13 +49,23 @@ public class Ball : MonoBehaviour
 
     void OnMouseDrag()
     {
-        // applies force when draggin
+        // applies force when dragging
         // rb.AddForce((mousePosition - originPosition).normalized * force, ForceMode.Force);  
     
         curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         // transform.position = curPosition;
         rb.AddForce((curPosition - originPosition).normalized * force, ForceMode.Force);  
-   
+        isDragging = true;
+        forceApplied = false;
+
+    }
+
+    void OnMouseUp()
+    {
+        forceApplied = true;
+        isDragging = false;
+        currentVelocity = rb.velocity;
+        Debug.Log("no drag");
     }
 }
