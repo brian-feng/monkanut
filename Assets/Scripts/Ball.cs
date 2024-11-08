@@ -11,33 +11,25 @@ public class Ball : MonoBehaviour
     private Vector3 originPosition;
 
     [SerializeField] public HingeJoint joint;
-
-    [SerializeField] public GameObject anchor;
-    [SerializeField] public GameObject chainBall;
     [SerializeField] Rigidbody rb;
     [SerializeField] public float force = 100f;
     private Vector3 screenPoint;
 
-    private Rigidbody chainRb;
     private Vector3 offset;
     private Vector3 curScreenPoint;
     private Vector3 curPosition;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        chainRb = chainBall.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // https://discussions.unity.com/t/dragging-constrained-to-radius-with-decay/570092/5
-        originPosition = new Vector3(anchor.transform.position.x,anchor.transform.position.y, 0);
+        originPosition = new Vector3(transform.position.x,transform.position.y, 0);
         mousePosition = Input.mousePosition;
         mousePosition.z = 0;
-
-
-        // rb.AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition) - chainBall.transform.position).normalized * force, ForceMode.Impulse);  
 
         // https://discussions.unity.com/t/drag-gameobject-with-mouse/1798/8
 
@@ -47,7 +39,7 @@ public class Ball : MonoBehaviour
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
         curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-        transform.position = curPosition;
+        // transform.position = curPosition;
 
 
     }
@@ -55,12 +47,13 @@ public class Ball : MonoBehaviour
 
     void OnMouseDrag()
     {
-        // curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-        // Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        // applies force when draggin
+        // rb.AddForce((mousePosition - originPosition).normalized * force, ForceMode.Force);  
+    
+        curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         // transform.position = curPosition;
-
-        // on mouse drag  
-
-        rb.AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition) - chainBall.transform.position).normalized * force, ForceMode.Impulse);  
+        rb.AddForce((curPosition - originPosition).normalized * force, ForceMode.Force);  
+   
     }
 }
