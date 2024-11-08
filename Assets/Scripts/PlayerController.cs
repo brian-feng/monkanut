@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
         }
         velocity.Normalize();
         transform.Translate(velocity*Time.deltaTime*SPEED);
+        Debug.Log(velocity);
     }
 
     
