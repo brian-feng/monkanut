@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     public float SPEED;
     private Rigidbody rb;
     // Start is called before the first frame update
+    public bool isGrounded;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,5 +24,19 @@ public class PlayerController : MonoBehaviour
         Debug.Log(velocity);
     }
 
+    private void OnCollisionStay(Collision collision) {
+        // if player is colliding with floor
+        if (collision.gameObject.CompareTag("Ground")) {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision) {
+        // if player is colliding with floor
+        if (collision.gameObject.CompareTag("Ground")) {
+            isGrounded = false;
+        }
+    }
+    
     
 }

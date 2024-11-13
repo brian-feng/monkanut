@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour
     private Vector3 originPosition;
     [SerializeField] Rigidbody rb;
     [SerializeField] public float force = 10f;
+    [SerializeField] public PlayerController playerController;
     private Vector3 screenPoint;
     private Vector3 offset;
     private Vector3 curScreenPoint;
@@ -20,6 +21,7 @@ public class Ball : MonoBehaviour
     public Vector3 currentVelocity;
     public bool forceApplied = false;
     public float speed;
+    
 
     void Start()
     {
@@ -47,6 +49,7 @@ public class Ball : MonoBehaviour
         // curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         isDragging = true;
         StartCoroutine(CalcSpeed());
+        
         // transform.position = curPosition;
 
         // obtain the current cursor position
@@ -70,6 +73,8 @@ public class Ball : MonoBehaviour
         // rb.AddForce((curPosition - originPosition).normalized * force, ForceMode.Force);  
         isDragging = true;
         forceApplied = false;
+    
+        
 
     }
 
