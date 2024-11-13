@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,11 +19,14 @@ public class Ball : MonoBehaviour
     public bool isDragging = false;
     public Vector3 currentVelocity;
     public bool forceApplied = false;
+    public float speed;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Physics.gravity = new Vector3(0,-4,0); 
+        rb.drag = 0.1f;
+        rb.angularDrag = 0.1f;
     }
 
     // Update is called once per frame
@@ -39,10 +43,14 @@ public class Ball : MonoBehaviour
     void OnMouseDown() {
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-        curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-        curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        // curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        // curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        isDragging = true;
+        StartCoroutine(CalcSpeed());
         // transform.position = curPosition;
 
+        // obtain the current cursor position
+        // from the current cursor position 
 
     }
 
@@ -51,11 +59,15 @@ public class Ball : MonoBehaviour
     {
         // applies force when dragging
         // rb.AddForce((mousePosition - originPosition).normalized * force, ForceMode.Force);  
-    
+        // TODO: force should not be applied until at max radius
         curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         // transform.position = curPosition;
-        rb.AddForce((curPosition - originPosition).normalized * force, ForceMode.Force);  
+        Vector3 directionToMouse = (curPosition - originPosition).normalized;
+        rb.AddForce(directionToMouse * force, ForceMode.Force);
+        rb.AddForce(-directionToMouse * force * 0.5f, ForceMode.Force); 
+
+        // rb.AddForce((curPosition - originPosition).normalized * force, ForceMode.Force);  
         isDragging = true;
         forceApplied = false;
 
@@ -65,7 +77,22 @@ public class Ball : MonoBehaviour
     {
         forceApplied = true;
         isDragging = false;
+        speed = 0;
         currentVelocity = rb.velocity;
         Debug.Log("no drag");
+    }
+
+    IEnumerator CalcSpeed()
+    {
+        // https://www.youtube.com/watch?v=tJfJOMIMglE&t=4s
+        bool isPlaying = true;
+
+        while (isDragging) {
+            Vector3 prevPos = transform.position;
+
+            yield return new WaitForFixedUpdate();
+
+            speed = Mathf.RoundToInt(Vector3.Distance(transform.position, prevPos) / Time.fixedDeltaTime);
+        }
     }
 }
