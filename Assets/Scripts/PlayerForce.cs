@@ -19,7 +19,12 @@ public class PlayerForce : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ball.isDragging)
+        {
+            rb.isKinematic = true;
+        }
         if (ball.forceApplied) {
+            rb.isKinematic = false;
             originPosition = new Vector3(transform.position.x,transform.position.y, 0);
 
             ApplyForce(ball.currentVelocity);

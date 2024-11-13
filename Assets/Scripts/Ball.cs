@@ -38,10 +38,8 @@ public class Ball : MonoBehaviour
         originPosition = new Vector3(transform.position.x,transform.position.y, 0);
         mousePosition = Input.mousePosition;
         mousePosition.z = 0;
-
-        // https://discussions.unity.com/t/drag-gameobject-with-mouse/1798/8
-
     }
+
     void OnMouseDown() {
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
