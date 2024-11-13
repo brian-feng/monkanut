@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Attach : MonoBehaviour
 {
-    [SerializeField] LayerMask interactableLayer;
     // using the current rope 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +24,8 @@ public class Attach : MonoBehaviour
     }
 
     private void attachObject(GameObject obj) {
-        // if (obj.layer == interactableLayer) {
+        if (obj.CompareTag("Interactive")) {
             obj.transform.parent = transform;
-        // }
+        }
     }
 }

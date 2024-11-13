@@ -8,7 +8,8 @@ public class PlayerForce : MonoBehaviour
     public Ball ball;
     private Rigidbody rb;
     private Vector3 originPosition;
-    
+    public bool isGrounded;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class PlayerForce : MonoBehaviour
             ApplyForce(ball.currentVelocity);
             ball.forceApplied = false;
         }
-        if (ball.isDragging) {
+        if (ball.isDragging) { // TODO: make it so that its kinematic only when its grounded
             rb.isKinematic = true;
         } else {
             rb.isKinematic = false;
@@ -37,5 +38,19 @@ public class PlayerForce : MonoBehaviour
 
         rb.AddForce(velocity, ForceMode.Force);  
 
+    }
+
+    private void OnCollisionStay(Collision collision) {
+        // if player is colliding with floor
+        if (collision.gameObject.CompareTag("Ground")) {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision) {
+        // if player is colliding with floor
+        if (collision.gameObject.CompareTag("Ground")) {
+            isGrounded = false;
+        }
     }
 }

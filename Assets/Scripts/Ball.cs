@@ -49,9 +49,6 @@ public class Ball : MonoBehaviour
         // curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         isDragging = true;
         StartCoroutine(CalcSpeed());
-        
-        // transform.position = curPosition;
-
         // obtain the current cursor position
         // from the current cursor position 
 
@@ -62,7 +59,6 @@ public class Ball : MonoBehaviour
     {
         // applies force when dragging
         // rb.AddForce((mousePosition - originPosition).normalized * force, ForceMode.Force);  
-        // TODO: force should not be applied until at max radius
         curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         // transform.position = curPosition;
@@ -70,12 +66,8 @@ public class Ball : MonoBehaviour
         rb.AddForce(directionToMouse * force, ForceMode.Force);
         rb.AddForce(-directionToMouse * force * 0.5f, ForceMode.Force); 
 
-        // rb.AddForce((curPosition - originPosition).normalized * force, ForceMode.Force);  
         isDragging = true;
         forceApplied = false;
-    
-        
-
     }
 
     void OnMouseUp()
@@ -90,7 +82,7 @@ public class Ball : MonoBehaviour
     IEnumerator CalcSpeed()
     {
         // https://www.youtube.com/watch?v=tJfJOMIMglE&t=4s
-        bool isPlaying = true;
+        // bool isPlaying = true;
 
         while (isDragging) {
             Vector3 prevPos = transform.position;
