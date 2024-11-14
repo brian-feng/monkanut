@@ -24,7 +24,7 @@ public class Attach : MonoBehaviour
     }
 
     private void attachObject(GameObject obj) {
-        if (obj.CompareTag("Interactive")) {
+        if (obj.CompareTag("Interactable")) {
             obj.transform.parent = transform;
         }
     }
