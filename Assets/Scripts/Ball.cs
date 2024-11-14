@@ -26,6 +26,7 @@ public class Ball : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Physics.gravity = new Vector3(0, -8, 0);
         rb.drag = 0.1f;
         rb.angularDrag = 0.1f;
     }
