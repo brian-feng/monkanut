@@ -30,12 +30,14 @@ public class PlayerForce : MonoBehaviour
             ApplyForce(ball.currentVelocity);
             ball.forceApplied = false;
         }
-        if (ball.isDragging) { // TODO: make it so that its kinematic only when its grounded
+        if (ball.isDragging && ball.isInFront) { // TODO: make it so that its kinematic only when its grounded
             rb.isKinematic = true;
         } else {
             rb.isKinematic = false;
         }
     }
+
+
 
     private void ApplyForce(Vector3 velocity) {
         Debug.Log("force applied");

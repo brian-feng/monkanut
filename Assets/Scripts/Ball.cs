@@ -21,7 +21,8 @@ public class Ball : MonoBehaviour
     public Vector3 currentVelocity;
     public bool forceApplied = false;
     public float speed;
-    
+    public bool isInFront;
+
 
     void Start()
     {
@@ -76,6 +77,16 @@ public class Ball : MonoBehaviour
         currentVelocity = rb.velocity;
         Debug.Log("no drag");
     }
+
+    void FixedUpdate() {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, new Vector3(0,0, 1) , out hit)) {
+            isInFront = true;
+        }
+
+        // obtain the backwall position
+    }
+
 
     IEnumerator CalcSpeed()
     {
