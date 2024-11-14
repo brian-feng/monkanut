@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -27,7 +26,6 @@ public class Ball : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Physics.gravity = new Vector3(0,-4,0); 
         rb.drag = 0.1f;
         rb.angularDrag = 0.1f;
     }

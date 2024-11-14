@@ -31,8 +31,8 @@ public class enemyPatrol : MonoBehaviour
         }
     }
     private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(patrolPoints[targetPoint].transform.position, 0.5f);
-        Gizmos.DrawWireSphere(patrolPoints[targetPoint-1].transform.position, 0.5f);
-        Gizmos.DrawLine(patrolPoints[targetPoint].transform.position, patrolPoints[targetPoint-1].transform.position);
+        //Gizmos.DrawWireSphere(patrolPoints[targetPoint % patrolPoints.Length].transform.position, 0.5f);
+        //Gizmos.DrawWireSphere(patrolPoints[(targetPoint - 1) % patrolPoints.Length].transform.position, 0.5f);
+        //Gizmos.DrawLine(patrolPoints[targetPoint % patrolPoints.Length].transform.position, patrolPoints[(targetPoint-1) % patrolPoints.Length].transform.position);
     }
 }
